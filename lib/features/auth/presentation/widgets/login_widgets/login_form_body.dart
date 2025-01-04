@@ -26,7 +26,7 @@ class LoginFormBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset(
-            'assets/images/LoginLogo.png',
+            kLogoIconImg,
             width: 50,
           ),
           Text(

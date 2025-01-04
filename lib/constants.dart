@@ -1,11 +1,25 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 
 const String kLogoImg = 'assets/images/Logo2.png';
 const String kSplashImg = 'assets/images/SplashImage.png';
+const String kBackgroundPromoCardImg = 'assets/images/BackgroundPromoCard.jpg';
+const String kPromoCardIconImg = 'assets/images/PromoCardIcon.png';
+const String kLogoIconImg = 'assets/images/LoginLogo.png';
+const String kProfileImg = 'assets/images/9434619.jpg';
 const Color kSecondColor = Color(0xff537895);
+const Color kBackgroundColor = Color(0xfff8f8f8);
+const Color kSecondOnBackgroundColor = Color(0xffdadada);
+const Color kSecondFontColor = Color(0xffa6a6a6);
+const Color kSecondBackgroundColor = Colors.white;
 const String kSplashView = 'splashView';
 const String kHomeView = 'homeView';
 const String kBookDetailsView = 'bookDetailsView';
 const String kRegisterView = 'registerView';
 const String kLoginView = 'loginView';
 const String kAuthView = 'authView';
+const String kMenuView = 'menuView';
+const String kNotificationsView = 'notificationsView';
+const String kProfileView = 'profileView';
+const String kForYouBox = 'forYouBox';
+const String kBestSellersBox = 'bestSellersBox';
+const String kLatestAddedBox = 'latestAddedBox';

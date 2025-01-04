@@ -8,6 +8,7 @@ class CustomIconButton extends StatelessWidget {
       this.color = Colors.black,
       this.size = 27,
       required this.function});
+
   final IconData? icon;
   final Alignment alignment;
   final Color color;
@@ -17,6 +18,7 @@ class CustomIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      padding: EdgeInsets.zero,
       color: color,
       alignment: alignment,
       onPressed: function,

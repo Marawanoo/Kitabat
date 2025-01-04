@@ -20,13 +20,16 @@ class RegisterView extends StatelessWidget {
         firebaseFirestore: FirebaseFirestore.instance);
 
     return BlocProvider<RegisterCubit>(
-      create: (BuildContext context) =>
-          RegisterCubit(RegisterUserUseCase(authRepository)),
+      create: (BuildContext context) => RegisterCubit(
+        RegisterUserUseCase(authRepository),
+      ),
       child: const Scaffold(
-          body: CustomAuthBackground(
-              widget: AuthBody(
-        widget: RegisterFormBody(),
-      ))),
+        body: CustomAuthBackground(
+          widget: AuthBody(
+            widget: RegisterFormBody(),
+          ),
+        ),
+      ),
     );
   }
 }

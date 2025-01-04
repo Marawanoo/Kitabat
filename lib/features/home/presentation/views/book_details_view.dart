@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kitabat_app/features/home/presentation/views/widgets/details_widgets/details_app_bar.dart';
-import 'package:kitabat_app/features/home/presentation/views/widgets/details_widgets/details_body.dart';
+
+import '../widgets/details_widgets/details_app_bar.dart';
+import '../widgets/details_widgets/details_body.dart';
 
 class BookDetailsView extends StatelessWidget {
   const BookDetailsView({super.key});

@@ -13,13 +13,18 @@ class CustomTextField extends StatefulWidget {
     this.validatorText,
     this.onSaved,
     this.validator,
+    this.isSearch = false,
+    this.width = 0.8,
   });
+
   final String hintText;
   final IconData suffixIcon;
   final bool isPassword;
+  final bool isSearch;
   final String? validatorText;
   final Function(String?)? onSaved;
   final String? Function(String?)? validator;
+  final double width;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -31,7 +36,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: MediaQuery.of(context).size.width * 0.8,
+        width: MediaQuery.of(context).size.width * widget.width,
         child: TextFormField(
           validator: widget.validator ??
               (value) {
@@ -52,7 +57,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             hintText: widget.hintText,
             hintTextDirection: TextDirection.rtl,
             hintStyle: Theme.of(context).textTheme.labelMedium,
-            contentPadding: const EdgeInsets.symmetric(vertical: 10),
+            contentPadding: const EdgeInsets.symmetric(vertical: 0),
             suffixIcon: Icon(
               widget.suffixIcon,
               size: 25,
@@ -72,9 +77,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
               borderRadius: BorderRadius.circular(8),
             ),
             errorStyle: Theme.of(context).textTheme.labelSmall,
-            // focusedBorder: OutlineInputBorder(
-            //     borderRadius: BorderRadius.circular(8),
-            //     borderSide: const BorderSide(color: kSecondColor, width: 2)),
+            focusedBorder: widget.isSearch
+                ? OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: const BorderSide(color: kSecondColor, width: 2))
+                : null,
           ),
         ));
   }

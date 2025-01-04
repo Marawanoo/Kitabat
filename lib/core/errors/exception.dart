@@ -4,10 +4,11 @@ import 'exception_model.dart';
 
 class ServerException implements Exception {
   final ExceptionModel exceptionModel;
+
   ServerException({required this.exceptionModel});
 }
 
-void exceptionSwitch(DioException e) {
+exceptionSwitch(DioException e) {
   ExceptionModel exceptionModel = ExceptionModel.fromJson(e.response!.data);
 
   switch (e.type) {

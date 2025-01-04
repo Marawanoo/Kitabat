@@ -21,4 +21,10 @@ abstract class AppIcons {
   static const IconData facebookIcon = FontAwesomeIcons.facebook;
   static const IconData appleIcon = FontAwesomeIcons.apple;
   static const IconData mobileIcon = Iconsax.mobile;
+  static const IconData shareIcon = FontAwesomeIcons.share;
+  static const IconData addBookIcon = Iconsax.additem;
+  static const IconData shopIcon = Iconsax.shop5;
+  static const IconData questionIcon = FontAwesomeIcons.solidCircleQuestion;
+  static const IconData paperIcon = FontAwesomeIcons.solidNewspaper;
+  static const IconData privacyIcon = FontAwesomeIcons.shieldHalved;
 }

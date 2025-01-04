@@ -1,5 +1,5 @@
 class EndPoints {
-  static String baseUrl = 'https://www.googleapis.com/books/';
+  static String baseUrl = 'https://www.googleapis.com/books/v1/';
 }
 
 class ApiKey {

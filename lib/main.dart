@@ -1,6 +1,17 @@
+import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kitabat_app/constants.dart';
+import 'package:kitabat_app/core/api/dio_consumer.dart';
+import 'package:kitabat_app/features/auth/presentation/views/profile_view.dart';
+import 'package:kitabat_app/features/home/data/repositories/home_repository_impl.dart';
+import 'package:kitabat_app/features/home/data/sources/home_local_data_source_impl.dart';
+import 'package:kitabat_app/features/home/data/sources/home_remote_data_source_impl.dart';
+import 'package:kitabat_app/features/home/domain/entities/book_entity.dart';
+import 'package:kitabat_app/features/home/presentation/views/menu_view.dart';
+import 'package:kitabat_app/features/notifications/presentation/views/notifications_view.dart';
 import 'package:kitabat_app/features/splash/presentation/views/auth_gate.dart';
 
 import 'features/auth/presentation/views/login_view.dart';
@@ -13,8 +24,18 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
+  await Hive.initFlutter();
+  Hive.registerAdapter(BookEntityAdapter());
+  getIt.registerSingleton<HomeRepositoryImpl>(HomeRepositoryImpl(
+      homeRemoteDataSource: HomeRemoteDataSourceImpl(DioConsumer(Dio())),
+      homeLocalDataSource: HomeLocalDataSourceImpl()));
+  await Hive.openBox<BookEntity>(kForYouBox);
+  await Hive.openBox<BookEntity>(kBestSellersBox);
+  await Hive.openBox<BookEntity>(kLatestAddedBox);
   runApp(const KitabatApp());
 }
+
+final getIt = GetIt.instance;
 
 class KitabatApp extends StatelessWidget {
   const KitabatApp({super.key});
@@ -30,13 +51,17 @@ class KitabatApp extends StatelessWidget {
         kBookDetailsView: (context) => const BookDetailsView(),
         kRegisterView: (context) => const RegisterView(),
         kLoginView: (context) => const LoginView(),
-        kAuthView: (context) => const AuthGate()
+        kAuthView: (context) => const AuthGate(),
+        kMenuView: (context) => const MenuView(),
+        kNotificationsView: (context) => const NotificationsView(),
+        kProfileView: (context) => const ProfileView(),
       },
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
+          surfaceTintColor: Colors.white,
           backgroundColor: Colors.white,
         ),
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: kBackgroundColor,
         fontFamily: 'Zain',
         textTheme: TextTheme(
           headlineLarge: const TextStyle(
@@ -92,7 +117,7 @@ class KitabatApp extends StatelessWidget {
           labelMedium: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.normal,
-              color: Colors.black.withOpacity(0.5),
+              color: Colors.black.withValues(alpha: 0.5),
               height: 1.3),
         ),
       ),

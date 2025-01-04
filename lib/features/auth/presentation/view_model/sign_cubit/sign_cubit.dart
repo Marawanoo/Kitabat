@@ -59,7 +59,10 @@ class SignCubit extends Cubit<SignState> {
         AuthShowDialogs().showSuccessSnackbar(context, 'تم التسجيل بنجاح!');
       }
     } catch (e) {
-      AuthShowDialogs().showSuccessSnackbar(context, 'حدث خطأ أثناء التسجيل.');
+      if (context.mounted) {
+        AuthShowDialogs()
+            .showSuccessSnackbar(context, 'حدث خطأ أثناء التسجيل.');
+      }
     }
   }
 
@@ -75,18 +78,25 @@ class SignCubit extends Cubit<SignState> {
         AuthShowDialogs().showSuccessSnackbar(context, 'تم التسجيل بنجاح!');
       }
     } catch (e) {
-      print('$e===========');
-      AuthShowDialogs().showSuccessSnackbar(context, 'حدث خطأ أثناء التسجيل.');
+      if (context.mounted) {
+        AuthShowDialogs()
+            .showSuccessSnackbar(context, 'حدث خطأ أثناء التسجيل.');
+      }
     }
   }
 
   sendPasswordResetEmail(String email, BuildContext context) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      AuthShowDialogs().showSuccessSnackbar(context, 'تم الأرسال');
-      Navigator.pop(context);
+      if (context.mounted) {
+        AuthShowDialogs().showSuccessSnackbar(context, 'تم الأرسال');
+        Navigator.pop(context);
+      }
     } catch (e) {
-      AuthShowDialogs().showSuccessSnackbar(context, 'حدث خطأ أثناء الأرسال.');
+      if (context.mounted) {
+        AuthShowDialogs()
+            .showSuccessSnackbar(context, 'حدث خطأ أثناء الأرسال.');
+      }
     }
   }
 }

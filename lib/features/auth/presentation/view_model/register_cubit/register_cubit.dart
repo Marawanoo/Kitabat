@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kitabat_app/features/auth/domain/entities/user_entity.dart';
 import 'package:kitabat_app/features/auth/domain/use_cases/register_user_use_case.dart';
 import 'package:kitabat_app/features/auth/presentation/view_model/register_cubit/register_state.dart';
 import 'package:kitabat_app/features/auth/presentation/widgets/auth_show_dialogs.dart';
@@ -11,6 +12,8 @@ import '../../../../../constants.dart';
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit(this.registerUserUseCase) : super(RegisterInitialState());
   final RegisterUserUseCase registerUserUseCase;
+  UserEntity userEntity = UserEntity(
+      firstName: 'أحمد', lastName: 'محمد', email: 'ahmedmohamed@gmail.com');
 
   CollectionReference users = FirebaseFirestore.instance.collection('users');
 
@@ -22,6 +25,9 @@ class RegisterCubit extends Cubit<RegisterState> {
     try {
       await registerUserUseCase.call(firstName, lastName, email, password);
       emit(RegisterSuccessState());
+      userEntity =
+          UserEntity(firstName: firstName, lastName: lastName, email: email);
+
       if (context.mounted) {
         Navigator.pushNamedAndRemoveUntil(
           context,
